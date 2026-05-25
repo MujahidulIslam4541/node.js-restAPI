@@ -8,6 +8,7 @@ const port = config.port;
 import config from "./config";
 import { userRouter } from "./modules/users/users.routes";
 import { profileRouter } from "./modules/profiels/profiles.routes";
+import { authRouter } from "./modules/auth/auth.routes";
 
 app.use(express.json());
 
@@ -20,6 +21,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use('/api/users', userRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/auth', authRouter);
 
 
 
