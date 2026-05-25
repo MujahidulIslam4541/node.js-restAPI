@@ -22,10 +22,12 @@ export const initDB = async () => {
       )
     `);
 
+    console.log("✅  Database connected successful");
+
     await pool.query(`
       CREATE TABLE IF NOT EXISTS profiles(
       id SERIAL PRIMARY KEY,
-      user_id INT REFERENCES users(id) ON DELETE CASCADE,
+      user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
       bio TEXT,
       number VARCHAR(20),
       gender VARCHAR(10),
@@ -34,7 +36,7 @@ export const initDB = async () => {
       
       )
       `);
-    console.log("✅  Database connected successful");
+    console.log("✅  Profiles table created successfully");
   } catch (error: any) {
     console.error("❌ Full error:", error);
   }

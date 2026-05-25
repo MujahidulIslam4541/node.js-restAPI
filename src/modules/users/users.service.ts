@@ -1,13 +1,18 @@
 import { pool } from "../../db";
 import type { IUser } from "./users.interface";
+import bcrypt from "bcryptjs";
 
 const createUser = async (payload: IUser) => {
+  const hashedPassword = await bcrypt.hash(payload.password, 10);
   const result = await pool.query(
     `
     INSERT INTO users(name,email,password,age)VALUES($1,$2,$3,$4)RETURNING *
     `,
-    [payload.name, payload.email, payload.password, payload.age],
+    [payload.name, payload.email, hashedPassword, payload.age],
   );
+
+  delete result.rows[0].password;
+
   return result.rows[0];
 };
 
@@ -17,6 +22,11 @@ const getUsers = async () => {
       SELECT * FROM users
       `,
   );
+
+  result.rows.forEach((row: any) => {
+    delete row.password;
+  });
+
   return result;
 };
 
@@ -27,10 +37,12 @@ const getUser = async (id: string) => {
       `,
     [id],
   );
+  delete result.rows[0].password;
   return result;
 };
 
 const updateUser = async (id: string, payload: IUser) => {
+  const hashedPassword = await bcrypt.hash(payload.password, 10);
   const result = await pool.query(
     `
       UPDATE users SET 
@@ -40,8 +52,9 @@ const updateUser = async (id: string, payload: IUser) => {
       WHERE id=$4 RETURNING *
 
       `,
-    [payload.name, payload.password, payload.age, id],
+    [payload.name, hashedPassword, payload.age, id],
   );
+  delete result.rows[0].password;
   return result.rows[0];
 };
 

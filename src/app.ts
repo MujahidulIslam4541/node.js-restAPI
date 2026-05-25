@@ -6,8 +6,8 @@ import express, {
 const app: Application = express();
 const port = config.port;
 import config from "./config";
-import { initDB, pool } from "./db";
 import { userRouter } from "./modules/users/users.routes";
+import { profileRouter } from "./modules/profiels/profiles.routes";
 
 app.use(express.json());
 
@@ -19,6 +19,7 @@ app.get("/", (req: Request, res: Response) => {
 
 
 app.use('/api/users', userRouter);
+app.use('/api/profile', profileRouter);
 
 
 
