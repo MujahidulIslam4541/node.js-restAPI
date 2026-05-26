@@ -1,0 +1,30 @@
+[
+  {
+    "timestamp": "2026-05-26T20:09:16.093Z",
+    "method": "GET",
+    "url": "/",
+    "status": 200,
+    "responseTime": "55ms"
+  },
+  {
+    "timestamp": "2026-05-26T20:09:30.075Z",
+    "method": "GET",
+    "url": "/",
+    "status": 200,
+    "responseTime": "338ms"
+  },
+  {
+    "timestamp": "2026-05-26T20:10:03.016Z",
+    "method": "POST",
+    "url": "/",
+    "status": 201,
+    "responseTime": "477ms"
+  },
+  {
+    "timestamp": "2026-05-26T20:13:11.985Z",
+    "method": "POST",
+    "url": "/",
+    "status": 201,
+    "responseTime": "123ms"
+  }
+]

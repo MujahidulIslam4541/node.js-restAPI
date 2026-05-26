@@ -1,11 +1,12 @@
 import { Router, type Request, type Response } from "express";
 import { userController } from "./users.controller";
+import authMiddleware from "../../middleware/auth";
 
 const router = Router();
 
 router.post("/", userController.createUser);
 // get all users from db
-router.get("/", userController.getUsers);
+router.get("/", authMiddleware, userController.getUsers);
 
 // get single user from db
 router.get("/:id", userController.getUserById);
